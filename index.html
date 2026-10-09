@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K0maru TV — Смотрите мультики и не только!</title>
+<meta name="description" content="K0maru TV — прямой эфир. Смотрите мультики и не только!">
+<meta property="og:title" content="K0maru TV — Смотрите мультики и не только!">
+<meta property="og:description" content="Прямой эфир. Заходи и смотри!">
+<meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
 
 <style>
@@ -12,34 +16,23 @@
   --accent-light:#c084fc;
   --accent-dark:#7e22ce;
   --bg:#0a0612;
+  --border:rgba(168,85,247,.22);
   --text:#ffffff;
   --dim:#a89bc4;
-  --border:rgba(168,85,247,.22);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
-
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
+  background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;
 }
-
-/* Фон */
 body::before{
-  content:'';
-  position:fixed;inset:0;
+  content:'';position:fixed;inset:0;
   background:
-    radial-gradient(1000px 600px at 50% 0%, rgba(168,85,247,.28), transparent 60%),
-    radial-gradient(800px 500px at 50% 100%, rgba(126,34,206,.22), transparent 60%);
+    radial-gradient(1000px 600px at 50% 0%, rgba(168,85,247,.25), transparent 60%),
+    radial-gradient(800px 500px at 50% 100%, rgba(126,34,206,.20), transparent 60%),
+    radial-gradient(600px 400px at 0% 50%, rgba(192,132,252,.10), transparent 60%),
+    radial-gradient(600px 400px at 100% 50%, rgba(192,132,252,.10), transparent 60%);
   z-index:-2;pointer-events:none;
   animation:bgShift 20s ease-in-out infinite;
 }
@@ -47,194 +40,179 @@ body::before{
   0%,100%{transform:translate(0,0) scale(1)}
   50%{transform:translate(-1.5%,1.5%) scale(1.04)}
 }
-
 body::after{
-  content:'';
-  position:fixed;inset:0;
+  content:'';position:fixed;inset:0;
   background-image:
-    linear-gradient(rgba(168,85,247,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168,85,247,.05) 1px, transparent 1px);
-  background-size:56px 56px;
-  z-index:-1;
-  mask-image:radial-gradient(circle at 50% 50%, #000 15%, transparent 75%);
-  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 15%, transparent 75%);
+    linear-gradient(rgba(168,85,247,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,.04) 1px, transparent 1px);
+  background-size:56px 56px;z-index:-1;
+  mask-image:radial-gradient(circle at 50% 40%, #000 15%, transparent 75%);
+  -webkit-mask-image:radial-gradient(circle at 50% 40%, #000 15%, transparent 75%);
   pointer-events:none;
 }
-
-/* Контейнер */
-.wrap{
-  text-align:center;
-  max-width:640px;
-  width:100%;
-}
-
-/* Заголовок */
+.container{max-width:1180px;margin:0 auto;padding:26px 20px 60px}
 .title{
-  font-size:clamp(28px,5vw,52px);
-  font-weight:900;
-  letter-spacing:-1px;
-  line-height:1.1;
-  margin-bottom:10px;
+  font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:-.5px;
+  text-align:center;margin-bottom:6px;line-height:1.15;
 }
-
 .title .k0{
   background:linear-gradient(135deg,var(--accent-light),var(--accent),var(--accent-dark));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  background-size:200% 200%;
-  animation:gradientMove 5s ease infinite;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200% 200%;animation:gradientMove 5s ease infinite;
 }
-
-@keyframes gradientMove{
-  0%,100%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-}
-
+@keyframes gradientMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .subtitle{
-  color:var(--accent-light);
-  font-size:clamp(14px,2vw,19px);
-  font-weight:600;
-  margin-bottom:30px;
+  text-align:center;color:var(--accent-light);
+  font-size:clamp(13px,1.7vw,17px);font-weight:600;margin-bottom:28px;
 }
-
-/* Карточка статуса */
-.card{
-  position:relative;
-  padding:3px;
-  border-radius:20px;
+.player-shell{
+  position:relative;padding:3px;border-radius:22px;
   background:linear-gradient(135deg,
-    rgba(168,85,247,.7),
-    rgba(126,34,206,.5),
-    rgba(192,132,252,.7),
-    rgba(168,85,247,.7));
+    rgba(168,85,247,.7),rgba(126,34,206,.5),
+    rgba(192,132,252,.7),rgba(168,85,247,.7));
   background-size:300% 300%;
   animation:borderFlow 8s linear infinite;
   box-shadow:
-    0 30px 80px rgba(0,0,0,.6),
-    0 0 60px rgba(168,85,247,.3);
+    0 30px 80px rgba(0,0,0,.7),
+    0 0 80px rgba(168,85,247,.35),
+    0 0 160px rgba(126,34,206,.20);
+  margin-bottom:22px;
 }
-
 @keyframes borderFlow{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
-
-.card-inner{
-  border-radius:17px;
-  background:linear-gradient(160deg,rgba(23,14,40,.95),rgba(10,6,18,.95));
-  padding:40px 30px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:16px;
+.player-inner{
+  position:relative;border-radius:19px;overflow:hidden;
+  background:#000;aspect-ratio:16/9;
 }
-
-.icon{
-  font-size:64px;
-  filter:drop-shadow(0 0 24px var(--accent));
-  animation:float 3s ease-in-out infinite;
+.player-inner iframe{
+  position:absolute;inset:0;width:100%;height:100%;
+  border:0;display:block;
 }
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+.info-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;padding:18px 24px;
+  background:linear-gradient(160deg,rgba(168,85,247,.10),rgba(168,85,247,.03));
+  border:1px solid var(--border);border-radius:16px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-
-.status-title{
-  font-size:22px;
-  font-weight:800;
-  background:linear-gradient(135deg,var(--accent-light),var(--accent));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+.stream-meta{display:flex;align-items:center;gap:14px}
+.avatar{
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent-light),var(--accent-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(168,85,247,.25),0 0 28px rgba(168,85,247,.55);
+  animation:avatarPulse 3s ease-in-out infinite;
 }
-
-.status-text{
-  color:var(--dim);
-  font-size:14px;
-  line-height:1.6;
-  max-width:420px;
+@keyframes avatarPulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(168,85,247,.25),0 0 28px rgba(168,85,247,.55)}
+  50%{box-shadow:0 0 0 3px rgba(168,85,247,.5),0 0 40px rgba(168,85,247,.8)}
 }
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:rgba(168,85,247,.15);
-  color:var(--accent-light);
-  border:1px solid rgba(168,85,247,.4);
-  padding:6px 14px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  margin-top:6px;
+.stream-title h2{font-size:17px;font-weight:800;margin-bottom:3px}
+.stream-title .status{
+  font-size:13px;color:var(--dim);
+  display:flex;align-items:center;gap:7px;font-weight:500;
 }
-
-.dot{
-  width:8px;height:8px;
-  background:#22c55e;
-  border-radius:50%;
+.stream-title .status .dot{
+  width:8px;height:8px;background:#22c55e;border-radius:50%;
   animation:pulse 1.4s infinite;
 }
-
 @keyframes pulse{
   0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.4;transform:scale(.7)}
+  50%{opacity:.35;transform:scale(.7)}
 }
-
-/* Футер */
-.footer{
-  margin-top:24px;
-  color:var(--dim);
-  font-size:13px;
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:#fff;border:none;border-radius:12px;padding:12px 22px;
+  font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;
+  text-decoration:none;transition:.25s;
+  box-shadow:0 6px 24px rgba(168,85,247,.4);
 }
-
-.footer .heart{
-  color:var(--accent-light);
-  display:inline-block;
-  animation:beat 1.4s infinite;
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(168,85,247,.7)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text);box-shadow:none;
 }
-
-@keyframes beat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.25)}
+.btn.ghost:hover{
+  border-color:var(--accent);color:var(--accent-light);
+  background:rgba(168,85,247,.08);box-shadow:0 0 24px rgba(168,85,247,.4);
+}
+@media (max-width:700px){
+  .container{padding:18px 12px 40px}
+  .subtitle{margin-bottom:20px}
+  .info-bar{padding:14px 16px;flex-direction:column;align-items:flex-start}
+  .btn{padding:10px 16px;font-size:13px}
 }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="container">
 
-  <h1 class="title">
-    <span class="k0">K0</span>maru TV
-  </h1>
-
+  <h1 class="title"><span><span class="k0">K0</span>maru TV</span></h1>
   <p class="subtitle">Смотрите мультики и не только! 🐱</p>
 
-  <div class="card">
-    <div class="card-inner">
-      <div class="icon">✅</div>
-      <div class="status-title">Сайт работает!</div>
-      <p class="status-text">
-        Если вы видите эту страницу — значит GitHub Pages настроены правильно,
-        и сайт K0maru TV успешно залит.
-      </p>
-      <div class="badge">
-        <span class="dot"></span>
-        Тест пройден
+  <div class="player-shell">
+    <div class="player-inner">
+      <iframe
+        id="player"
+        src="https://rutube.ru/play/embed/66ab6ba9def4b3d792ca731550241e3f/"
+        frameborder="0"
+        allow="clipboard-write; autoplay; fullscreen; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div class="stream-meta">
+      <div class="avatar">🐱</div>
+      <div class="stream-title">
+        <h2>K0maru TV</h2>
+        <div class="status">
+          <span class="dot"></span>
+          <span>Прямая трансляция</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="footer">
-    © 2026 K0maru TV · Сделано с <span class="heart">♥</span>
+  <div class="buttons">
+    <button class="btn" onclick="toggleFullscreen()">⛶ Полный экран</button>
+    <button class="btn ghost" onclick="sharePage()">🔗 Поделиться</button>
+    <a class="btn ghost"
+       href="https://rutube.ru/video/66ab6ba9def4b3d792ca731550241e3f/"
+       target="_blank" rel="noopener">
+      ▶ Открыть на RuTube
+    </a>
   </div>
 
 </div>
+
+<script>
+function toggleFullscreen(){
+  const el = document.querySelector('.player-shell');
+  if(!document.fullscreenElement) el.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+
+function sharePage(){
+  const url = location.href;
+  if(navigator.share){
+    navigator.share({ title:'K0maru TV', url }).catch(()=>{});
+  }else{
+    navigator.clipboard.writeText(url)
+      .then(()=>alert('Ссылка скопирована: '+url))
+      .catch(()=>prompt('Скопируйте ссылку:', url));
+  }
+}
+</script>
 
 </body>
 </html>
